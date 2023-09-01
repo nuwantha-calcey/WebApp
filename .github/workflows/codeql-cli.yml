@@ -41,6 +41,6 @@ jobs:
         ./codeql/codeql database analyze codeql-database --format=sarif-latest --output=codeql-results.sarif --download codeql-csharp-queries
 
     - name: Upload results
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: codeql-results.sarif
