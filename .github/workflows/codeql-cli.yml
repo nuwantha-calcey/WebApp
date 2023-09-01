@@ -33,7 +33,7 @@ jobs:
 
     - name: Analyze CodeQL Database
       run: |
-        ./codeql/codeql database analyze codeql-database codeql-csharp-queries --format=sarif-latest --output=codeql-results.sarif
+        ./codeql/codeql database analyze --format=sarif-latest --output=codeql-results.sarif --download codeql-csharp-queries
 
     - name: Upload results
       uses: github/codeql-action/upload-sarif@v1
