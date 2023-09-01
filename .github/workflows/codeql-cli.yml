@@ -1,0 +1,41 @@
+name: 'CodeQL CLI Analysis'
+
+on:
+  push:
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET 7
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Download CodeQL CLI
+      run: |
+        wget https://github.com/github/codeql-cli-binaries/releases/download/v2.14.3/codeql-linux64.zip
+        unzip codeql-linux64.zip
+        rm codeql-linux64.zip
+
+    - name: Build
+      run: dotnet build WebApp/WebApp.csproj
+
+    - name: Create CodeQL Database
+      run: |
+        ./codeql/codeql database create codeql-database --language=csharp --source-root .
+
+    - name: Analyze CodeQL Database
+      run: |
+        ./codeql/codeql database analyze codeql-database codeql-csharp-queries --format=sarif-latest --output=codeql-results.sarif
+
+    - name: Upload results
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: codeql-results.sarif
