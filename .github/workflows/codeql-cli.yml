@@ -29,12 +29,12 @@ jobs:
         unzip codeql-linux64.zip
         rm codeql-linux64.zip
 
-    - name: Build
-      run: dotnet build WebApp/WebApp.csproj
+    # - name: Build
+    #   run: dotnet build WebApp/WebApp.csproj
 
     - name: Create CodeQL Database
       run: |
-        ./codeql/codeql database create codeql-database --language=csharp --command='./scripts/build.sh'
+        ./codeql/codeql database create codeql-database --language=csharp --command='.github/scripts/buildscript.sh'
 
     - name: Analyze CodeQL Database
       run: |
