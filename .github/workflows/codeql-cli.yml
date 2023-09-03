@@ -34,7 +34,7 @@ jobs:
 
     - name: Create CodeQL Database
       run: |
-        ./codeql/codeql database create codeql-database --language=csharp --no-run-unnecessary-builds --source-root .
+        ./codeql/codeql database create codeql-database --language=csharp --command='./scripts/build.sh'
 
     - name: Analyze CodeQL Database
       run: |
