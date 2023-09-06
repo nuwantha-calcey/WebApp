@@ -21,7 +21,7 @@ namespace YourNamespace.Controllers
       {
         connection.Open();
 
-        var query = $"SELECT * FROM Users WHERE Id = '{id}'";
+        var query = $"SELECT * FROM Users WHERE Id = '{@id}'";
         using (var command = new SqlCommand(query, connection))
         {
           using (var reader = command.ExecuteReader())
