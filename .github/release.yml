@@ -3,6 +3,6 @@ changelog:
     - title: New Changes
       labels:
         - "*"
-    - title: New Changes
+    - title: Bug Fixes
       labels:
         - bug-fix
