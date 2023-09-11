@@ -20,6 +20,9 @@ jobs:
         with:
           dotnet-version: 7.0.x
       
+      - name: Code Checkout
+        uses: actions/checkout@v3
+
       - name: Restore Dependencies
         run: dotnet restore WebApp.sln
       
@@ -102,7 +105,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    environment: development
+    environment: qa
 
     steps:
     - name: Dump GitHub context
