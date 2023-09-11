@@ -2,12 +2,12 @@ name: Manual Deploy
 
 on: 
   workflow_dispatch:
-    branches: [main]
     inputs:
       environment:
         description: 'The environment to deploy to'
         required: true
         type: environment
+    branches: [main]
 
 jobs:
   deploy:

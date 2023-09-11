@@ -17,6 +17,11 @@ namespace YourNamespace.Controllers
     [HttpGet("{id}")]
     public IActionResult GetUser(string id)
     {
+      if (id is null)
+      {
+        throw new ArgumentNullException(nameof(id));
+      }
+
       using (var connection = new SqlConnection(_configuration.GetConnectionString("YourConnectionString")))
       {
         connection.Open();
