@@ -2,6 +2,9 @@ name: Deploy
 
 on: 
   workflow_dispatch:
+    branches:
+      - 'master'
+      - 'releases/**'
     inputs:
       environment:
         description: 'The environment to deploy to'
