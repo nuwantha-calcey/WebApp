@@ -10,7 +10,7 @@ on:
         type: environment
 
 jobs:
-  deploy to ${{ inputs.environment }}:
+  deploy:
     runs-on: ubuntu-latest
 
     environment: ${{ inputs.environment }}
