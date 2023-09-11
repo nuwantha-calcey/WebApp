@@ -27,6 +27,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create Release
-        run: gh release create ${{ github.ref }} --target ${{ github.event.base_ref }}  --generate-notes
+        run: gh release create ${{ github.ref }} --target ${{ github.sha }}  --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
