@@ -10,3 +10,10 @@ jobs:
     steps:
     - name: Adding markdown
       run: echo '### Hello world!' >> $GITHUB_STEP_SUMMARY
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Adding markdown
+      run: echo '### Hello world 2!' >> $GITHUB_STEP_SUMMARY
