@@ -1,0 +1,12 @@
+name: summary
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Adding markdown
+      run: echo '### Hello world!' >> $GITHUB_STEP_SUMMARY
