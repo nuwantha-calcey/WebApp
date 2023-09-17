@@ -50,11 +50,11 @@ jobs:
 
             let markdownContent = '';
 
-            markdownContent += '### Features\n';
-            featurePRs.forEach(pr => markdownContent += `- ${pr.title}\n`);
+            markdownContent += '### Features  \n';
+            featurePRs.forEach(pr => markdownContent += `- ${pr.title}  \n`);
 
-            markdownContent += '### Bug fixes\n';
-            bugFixPRs.forEach(pr => markdownContent += `- ${pr.title}\n`);
+            markdownContent += '### Bug fixes  \n';
+            bugFixPRs.forEach(pr => markdownContent += `- ${pr.title}  \n`);
 
             return markdownContent;
 
