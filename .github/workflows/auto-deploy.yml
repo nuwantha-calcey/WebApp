@@ -20,6 +20,44 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
+  generate-changelog:
+    runs-on: ubuntu-latest
+
+    name: Generate Changelog Markdown
+
+    steps:
+      - name: Generate Changelog
+        id: changelog
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data } = await github.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed',
+              base: '${{ github.event.pull_request.base.ref }}',
+              head: '${{ github.event.pull_request.head.ref }}'
+            });
+
+            const mergedPRs = data.filter(pr => pr.merged_at !== null); 
+
+            const featurePRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'feature'));
+            const bugFixPRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'bug-fix'));
+
+            let markdownContent = '';
+
+            markdownContent += '### Features\n';
+            featurePRs.forEach(pr => markdownContent += `- ${pr.title}\n`);
+
+            markdownContent += '### Bug fixes\n';
+            bugFixPRs.forEach(pr => markdownContent += `- ${pr.title}\n`);
+
+            return markdownContent;
+
+      - name: Write changelog to job summary
+        run: |
+          echo "${{ steps.changelog.outputs.result }}" >> $GITHUB_STEP_SUMMARY
+
   build:
     runs-on: ubuntu-latest
 
