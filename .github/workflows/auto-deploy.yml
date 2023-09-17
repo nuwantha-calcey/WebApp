@@ -1,6 +1,7 @@
 name: Auto Deploy
 
 on: 
+  workflow_dispatch:
   pull_request:
     types:
       - closed
@@ -25,6 +26,9 @@ jobs:
 
     name: Generate Changelog Markdown
 
+    permissions:
+      contents: read
+
     steps:
       - name: Generate Changelog
         id: changelog
@@ -35,8 +39,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'closed',
-              base: '${{ github.event.pull_request.base.ref }}',
-              head: '${{ github.event.pull_request.head.ref }}'
+              base: 'development',
+              head: 'releases/sprint-1'
             });
 
             const mergedPRs = data.filter(pr => pr.merged_at !== null); 
