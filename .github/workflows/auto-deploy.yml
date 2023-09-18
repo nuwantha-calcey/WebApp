@@ -46,6 +46,8 @@ jobs:
 
             const mergedPRs = data.filter(pr => pr.merged_at !== null); 
 
+            console.log(mergedPRs);
+
             const featurePRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'feature'));
             const bugFixPRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'bug-fix'));
 
