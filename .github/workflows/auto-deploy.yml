@@ -61,6 +61,8 @@ jobs:
             markdownContent += '### Bug fixes  \n';
             bugFixPRs.forEach(pr => markdownContent += '- ${pr.title}  \n');
 
+            console.log(markdownContent);
+
             return markdownContent;
 
       - name: Write changelog to job summary
