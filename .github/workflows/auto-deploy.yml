@@ -34,6 +34,7 @@ jobs:
         id: changelog
         uses: actions/github-script@v6
         with:
+          result-encoding: string
           script: |
             const { data } = await github.rest.pulls.list({
               owner: context.repo.owner,
@@ -50,10 +51,10 @@ jobs:
 
             # let markdownContent = '';
 
-            let markdownContent = '### Features  ';
+            let markdownContent = '### Features  \n';
             featurePRs.forEach(pr => markdownContent += `- ${pr.title}  \n`);
 
-            markdownContent += '### Bug fixes  ';
+            markdownContent += '### Bug fixes  \n';
             bugFixPRs.forEach(pr => markdownContent += `- ${pr.title}  \n`);
 
             return markdownContent;
