@@ -48,12 +48,12 @@ jobs:
             const featurePRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'feature'));
             const bugFixPRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'bug-fix'));
 
-            let markdownContent = '';
+            # let markdownContent = '';
 
-            markdownContent += '### Features  \n';
+            let markdownContent = '### Features\';
             featurePRs.forEach(pr => markdownContent += `- ${pr.title}  \n`);
 
-            markdownContent += '### Bug fixes  \n';
+            markdownContent += '### Bug fixes\';
             bugFixPRs.forEach(pr => markdownContent += `- ${pr.title}  \n`);
 
             return markdownContent;
