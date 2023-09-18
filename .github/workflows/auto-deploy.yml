@@ -56,7 +56,7 @@ jobs:
 
             markdownContent = '### Features  \n';
             featurePRs.forEach(pr => console.log(pr.title));
-            featurePRs.forEach(pr => markdownContent += '- ' + 'pr.title' + '  \n');
+            featurePRs.forEach(pr => markdownContent += '- ' + pr.title + '  \n');
 
             markdownContent += '### Bug fixes  \n';
             bugFixPRs.forEach(pr => markdownContent += '- ${pr.title}  \n');
