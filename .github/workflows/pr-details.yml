@@ -33,7 +33,7 @@ jobs:
             let commits = [];
             let foundBaseSHA = false;
             while (true) {
-              const response = await github.repos.listCommits({
+              const response = await github.rest.repos.listCommits({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 sha: headSHA,
