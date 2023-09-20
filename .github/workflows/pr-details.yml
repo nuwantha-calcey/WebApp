@@ -76,8 +76,14 @@ jobs:
             markdownContent.push('### Features');
             featurePRs.forEach(pr => markdownContent.push('- ' + pr.title));
 
+            // Add a blank line to create a line break
+            markdownContent.push('');
+
             markdownContent.push('### Bug fixes');
             bugFixPRs.forEach(pr => markdownContent.push('- ' + pr.title));
+
+            // Again, add a blank line to create a line break
+            markdownContent.push('');
 
             return markdownContent.join('\n');
 
