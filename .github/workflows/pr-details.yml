@@ -54,4 +54,4 @@ jobs:
             
             const mergeCommits = allCommits.filter(commit => commit.parents.length > 1);
             
-            console.log('Merge Commits:', mergeCommits);
+            console.log('Merge Commits:', JSON.stringify(mergeCommits));
