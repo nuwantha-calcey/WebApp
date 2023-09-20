@@ -56,7 +56,7 @@ jobs:
             
             console.log('Merge Commits:', JSON.stringify(mergeCommits));
 
-            const pullRequests = [];
+            const pullRequestDetails = [];
             for (const commit of mergeCommits) {
               const prDetails = await github.rest.repos.listPullRequestsAssociatedWithCommit({
                 owner: context.repo.owner,
@@ -64,7 +64,11 @@ jobs:
                 commit_sha: commit.sha
               });
 
-                pullRequests.push(prDetails);
+              pullRequestDetails.push(prDetails);
             }
             
-            console.log('Associated Pull Requests:', JSON.stringify(pullRequests));
+            const data = pullRequestDetails.map(i => i.data)
+
+            const mergedPRs = data.filter(pr => pr.merged_at !== null); 
+
+            console.log('Associated Pull Requests:', JSON.stringify(mergedPRs));
