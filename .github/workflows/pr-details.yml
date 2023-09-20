@@ -73,11 +73,11 @@ jobs:
 
             let markdownContent = '';
 
-            markdownContent += '### Features\n\n';
-            featurePRs.forEach(pr => markdownContent += '- ' + pr.title + '\n\n');
+            markdownContent += '### Features  ';
+            featurePRs.forEach(pr => markdownContent += '- ' + pr.title + '  ');
 
-            markdownContent += '### Bug fixes\n\n';
-            bugFixPRs.forEach(pr => markdownContent += '- ' + pr.title + '\n\n');
+            markdownContent += '### Bug fixes  ';
+            bugFixPRs.forEach(pr => markdownContent += '- ' + pr.title + '  ');
 
             return markdownContent;
 
