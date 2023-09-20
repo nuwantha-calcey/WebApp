@@ -71,15 +71,15 @@ jobs:
 
             const bugFixPRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'bug-fix'));
 
-            let markdownContent = '';
+            let markdownContent = [];
 
-            markdownContent += '### Features  ';
-            featurePRs.forEach(pr => markdownContent += '- ' + pr.title + '  ');
+            markdownContent.push('### Features');
+            featurePRs.forEach(pr => markdownContent.push('- ' + pr.title));
 
-            markdownContent += '### Bug fixes  ';
-            bugFixPRs.forEach(pr => markdownContent += '- ' + pr.title + '  ');
+            markdownContent.push('### Bug fixes');
+            bugFixPRs.forEach(pr => markdownContent.push('- ' + pr.title));
 
-            return markdownContent;
+            return markdownContent.join('\n');
 
       - name: Write changelog to job summary
         run: |
