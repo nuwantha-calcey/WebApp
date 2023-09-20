@@ -21,6 +21,7 @@ jobs:
 
     steps:
       - name: Get Commits
+        id: changelog
         uses: actions/github-script@v6
         with:
           script: |
