@@ -66,4 +66,20 @@ jobs:
 
             const mergedPRs = pullRequestDetails.filter(pr => pr.merged_at !== null); 
 
-            console.log('Associated Pull Requests:', JSON.stringify(mergedPRs));
+            const featurePRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'feature'));
+
+            const bugFixPRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'bug-fix'));
+
+            let markdownContent = '';
+
+            markdownContent = '### Features  \n';
+            featurePRs.forEach(pr => markdownContent += '- ' + pr.title + '  \n');
+
+            markdownContent += '### Bug fixes  \n';
+            bugFixPRs.forEach(pr => markdownContent += '- ' + pr.title + '  \n');
+
+            return markdownContent;
+
+      - name: Write changelog to job summary
+        run: |
+          echo "${{ steps.changelog.outputs.result }}" >> $GITHUB_STEP_SUMMARY
