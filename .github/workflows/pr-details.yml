@@ -67,8 +67,14 @@ jobs:
               pullRequestDetails.push(prDetails);
             }
             
-            const data = pullRequestDetails.map(i => i.data)
+            const data = pullRequestDetails.map(i => i.data);
+
+            console.log('Response Data:', JSON.stringify(data));
 
             const mergedPRs = data.filter(pr => pr.merged_at !== null); 
 
             console.log('Associated Pull Requests:', JSON.stringify(mergedPRs));
+
+            const test = mergedPRs.data.filter(pr => pr.merged_at !== null); 
+
+            console.log('Test:', JSON.stringify(test));
