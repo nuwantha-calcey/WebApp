@@ -50,31 +50,20 @@ jobs:
               page++;
             }
             
-            console.log('Commits:', allCommits);
-            
             const mergeCommits = allCommits.filter(commit => commit.parents.length > 1 && commit.commit.verification.verified == true);
-            
-            console.log('Merge Commits:', JSON.stringify(mergeCommits));
 
             const pullRequestDetails = [];
+
             for (const commit of mergeCommits) {
-              const prDetails = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              const response = await github.rest.repos.listPullRequestsAssociatedWithCommit({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 commit_sha: commit.sha
               });
 
-              pullRequestDetails.push(prDetails);
+              pullRequestDetails.push(response.data);
             }
-            
-            const data = pullRequestDetails.map(i => i.data);
 
-            console.log('Response Data:', JSON.stringify(data));
-
-            const mergedPRs = data.filter(pr => pr.merged_at !== null); 
+            const mergedPRs = pullRequestDetails.filter(pr => pr.merged_at !== null); 
 
             console.log('Associated Pull Requests:', JSON.stringify(mergedPRs));
-
-            const test = mergedPRs.filter(pr => pr.merged_at !== null); 
-
-            console.log('Test:', JSON.stringify(test));
