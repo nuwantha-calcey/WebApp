@@ -61,7 +61,7 @@ jobs:
                 commit_sha: commit.sha
               });
 
-              pullRequestDetails.push(response.data);
+              pullRequestDetails.push(...response.data);
             }
 
             const mergedPRs = pullRequestDetails.filter(pr => pr.merged_at !== null); 
