@@ -29,32 +29,28 @@ jobs:
             console.log(`Base branch last commit: ${baseSHA}`);
             console.log(`Head branch last commit: ${headSHA}`);
             
+            const perPage = 100;
             let page = 1;
-            let commits = [];
-            let foundBaseSHA = false;
-
+            let allCommits = [];
+            
             while (true) {
-              const response = await github.repos.listCommits({
+              const compare = await github.rest.repos.compareCommitsWithBasehead({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                sha: headSHA,
-                per_page: 100,
+                basehead: `${baseSHA}...${headSHA}`,
+                per_page: perPage,
                 page: page
               });
-
-              if (response.data.length === 0) break;
-              for (const commit of response.data) {
-                commits.push(commit);
-                if (commit.sha === baseSHA) {
-                  foundBaseSHA = true;
-                  break;
-                }
+            
+              if (compare.data.commits.length === 0) {
+                break;
               }
-              if (foundBaseSHA) break;
+              
+              allCommits = allCommits.concat(compare.data.commits);
               page++;
             }
             
-            console.log('Commits:', commits);
+            console.log('Commits:', allCommits);
             
             const mergeCommits = allCommits.filter(commit => commit.parents.length > 1);
             
