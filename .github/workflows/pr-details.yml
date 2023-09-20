@@ -58,15 +58,13 @@ jobs:
 
             const pullRequests = [];
             for (const commit of mergeCommits) {
-              const commitDetails = await github.rest.repos.getCommit({
+              const prDetails = await github.rest.repos.listPullRequestsAssociatedWithCommit({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: commit.sha
+                commit_sha: commit.sha
               });
-              const pullRequest = commitDetails.data.pull_request;
-              if (pullRequest) {
-                pullRequests.push(pullRequest);
-              }
+
+                pullRequests.push(prDetails);
             }
             
             console.log('Associated Pull Requests:', JSON.stringify(pullRequests));
