@@ -55,3 +55,18 @@ jobs:
             const mergeCommits = allCommits.filter(commit => commit.parents.length > 1 && commit.commit.verification.verified == true);
             
             console.log('Merge Commits:', JSON.stringify(mergeCommits));
+
+            const pullRequests = [];
+            for (const commit of mergeCommits) {
+              const commitDetails = await github.rest.repos.getCommit({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: commit.sha
+              });
+              const pullRequest = commitDetails.data.pull_request;
+              if (pullRequest) {
+                pullRequests.push(pullRequest);
+              }
+            }
+            
+            console.log('Associated Pull Requests:', JSON.stringify(pullRequests));
