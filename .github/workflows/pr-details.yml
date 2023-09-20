@@ -75,6 +75,6 @@ jobs:
 
             console.log('Associated Pull Requests:', JSON.stringify(mergedPRs));
 
-            const test = mergedPRs.data.filter(pr => pr.merged_at !== null); 
+            const test = mergedPRs.filter(pr => pr.merged_at !== null); 
 
             console.log('Test:', JSON.stringify(test));
