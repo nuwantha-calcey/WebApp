@@ -71,20 +71,16 @@ jobs:
 
             const bugFixPRs = mergedPRs.filter(pr => pr.labels.some(label => label.name === 'bug-fix'));
 
-            let markdownContent = [];
+            let markdownContent = '';
 
-            markdownContent.push('### Features');
-            featurePRs.forEach(pr => markdownContent.push('- ' + pr.title));
+            markdownContent = '### Features  \n';
+            featurePRs.forEach(pr => markdownContent += '- ' + pr.title + '  \n');
 
-            markdownContent.push('');
+            markdownContent += '### Bug fixes  \n';
+            bugFixPRs.forEach(pr => markdownContent += '- ' + pr.title + '  \n');
 
-            markdownContent.push('### Bug fixes');
-            bugFixPRs.forEach(pr => markdownContent.push('- ' + pr.title));
-
-            markdownContent.push('');
-
-            return markdownContent.join('\n');
+            return markdownContent;
 
       - name: Write changelog to job summary
         run: |
-          cat "${{ steps.changelog.outputs.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.changelog.outputs.result }}" >> $GITHUB_STEP_SUMMARY
