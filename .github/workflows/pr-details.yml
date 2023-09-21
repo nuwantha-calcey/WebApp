@@ -79,8 +79,12 @@ jobs:
             markdownContent += '### Bug fixes  \n';
             bugFixPRs.forEach(pr => markdownContent += '- ' + pr.title + '  \n');
 
-            return markdownContent;
+            const fs = require('fs');
+
+            fs.writeFile('Output.md', markdownContent, (err) => {
+                if (err) throw err;
+            });
 
       - name: Write changelog to job summary
         run: |
-          echo "${{ steps.changelog.outputs.result }}" >> $GITHUB_STEP_SUMMARY
+          cat Output.md >> $GITHUB_STEP_SUMMARY
